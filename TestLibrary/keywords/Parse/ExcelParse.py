@@ -24,7 +24,7 @@ class ExcelParse:
         self.sheetNames = None
         self.fileName = None
 
-    def xl_open_excel(self, filename):
+    def kw_open_excel(self, filename):
         """
                         说明：从“文件名”参数中提供的路径打开Excel文件。
                          
@@ -43,7 +43,7 @@ class ExcelParse:
         self.fileName = filename
         self.sheetNames = self.wb.sheet_names()
             
-    def xl_read_cell_data_by_name(self, sheetname, cell_name):
+    def kw_read_cell_data_by_name(self, sheetname, cell_name):
         """
                         说明：使用单元格名称从该单元格返回数据。
 

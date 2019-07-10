@@ -39,7 +39,7 @@ class MysqlService(object):
         else:
             raise errno.Error("connect db failed")
 
-    def xl_mysql_release(self):
+    def kw_mysql_release(self):
         '''关闭数据库'''
         self.mysql_operator.release()
 
