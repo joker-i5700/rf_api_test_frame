@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="TestLibrary" type="library" format="ROBOT" generated="20190710 16:01:38">
+<version></version>
+<scope>global</scope>
+<namedargs>yes</namedargs>
+<doc>Thunder RF TestLibrary. Generate by lihongjie.
+
+You can execute   *python -m robot.libdoc -v docVersion ./TestLibrary/ TestLibrary.html*  command  to auto generate the doc.
+
+
+*Before running tests*
+
+Prior to running tests, TestLibrary must first be imported into your Robot test suite.
+
+Example:
+    | Library | TestLibrary |</doc>
+<kw name="C Param Order">
+<arguments>
+<arg>dic</arg>
+</arguments>
+<doc>only for chenwei</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Aes Cbc Decrypt">
+<arguments>
+<arg>secureKey</arg>
+<arg>iv</arg>
+<arg>data</arg>
+</arguments>
+<doc>解密</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Aes Cbc Encrypt">
+<arguments>
+<arg>secureKey</arg>
+<arg>iv</arg>
+<arg>data</arg>
+</arguments>
+<doc>加密</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Body Parse">
+<arguments>
+<arg>content</arg>
+<arg>key</arg>
+</arguments>
+<doc>                说明：将字符串转换为json格式并取出指定的key
+                
+                 参数:
+        |  content (string)                      | 输入一个字符串，通常为返回消息体的content字段                                  |
+        |  key (string)                      | 指定一个Key值                                  |
+                                        
+                返回值：
+        |  return value (String)                      | 返回取出指定的key        |
+                例子:
+
+| *Keywords*           |  *Parameters*                                      |
+| Xl Body Parse           |  ${response.content}  | requestType   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Body Tojson">
+<arguments>
+<arg>content</arg>
+</arguments>
+<doc>                说明：将字符串转化为json对象
+                
+                参数:
+        |  content (string)                      | 输入一个字符串，通常为返回消息体的content字段                                  |
+        
+                返回值：
+        |  return value (String)                      | 返回json类型对象        |
+                例子:
+
+| *Keywords*           |  *Parameters*                                      |
+| xl body tojson           |  ${response.content}  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Boundary Generate">
+<arguments>
+<arg>dict</arg>
+<arg>bran</arg>
+</arguments>
+<doc>说明：输入字典${dict}（key:value对）与${bran},生成from-data协议的数据格式string
+                   
+                   参数：
+|  dict (dict)                      | 输入一个字典                                |
+|  bran (String)                      |  from-data 格式分隔符                               |
+
+                    
+                    返回值：
+|  return value (String)                      | from-data协议的数据格式string body        |   
+
+                    例子：
+|            | *Keywords*           |  *Parameters*                                      |
+| ${dc}    | Evaluate    | {"sessionType":0,"clientSecret":100,"appid":100,"appName":"WEB-i.xunlei.com"}    |
+| ${st}=    | Set Variable    | ------WebKitFormBoundary5rFTEqcX0liWDgE8    |
+| ${ret}    | xl boundary generate    | ${dc}    | ${st}   |
+| Log    | ${ret}    |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Boundary Parse">
+<arguments>
+<arg>mfData</arg>
+</arguments>
+<doc>         说明：解析multipart/form-data类型消息体，返回Content-Type中需要使用的boundary值
+         
+         参数：
+ |  mfData (String)                      | multipart/form-data类型消息体                                |
+ 
+         返回值：
+ |  return value (String)                      | boundary值        |   
+ 
+         例子：
+|            | *Keywords*           |  *Parameters*                                      |
+| ${dc}    | Evaluate    | {"sessionType":0,"clientSecret":100,"appid":100,"appName":"WEB-i.xunlei.com"}    |
+| ${st}=    | Set Variable    | ------WebKitFormBoundary5rFTEqcX0liWDgE8    |
+| ${ret}    | xl boundary generate    | ${dc}    | ${st}    |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Config Add Item">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+<arg>key_value</arg>
+</arguments>
+<doc>增加配置项</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Config Get Value">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+</arguments>
+<doc>获取指定配置的值</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Config Remove Item">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+</arguments>
+<doc>删除指定配置的值</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Config Set Value">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+<arg>key_value</arg>
+</arguments>
+<doc>设置指定配置的值</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Dict Update Parse">
+<arguments>
+<arg>originDict</arg>
+<arg>changeDict</arg>
+</arguments>
+<doc>               说明：更新字典的值，如果key值不存在，则新增字典项
+                
+                参数:
+        |  originDict (dict)                      | 初始字典值                                 |
+        |  changeDict (dict)                      | 需要更新的字典值（k:v）                                 |
+        
+                返回值：
+        |  return value (String)                      | 将更新好的字典以字符串形式返回        |
+                例子:
+
+|            | *Keywords*           |  *Parameters*                                      |
+| ${strdic}    | Set Variable    | {1: 'a', 2: 3, 3: 'test', 4: 100}                   |
+| ${rstrdic}    | Set Variable    | {1:'b',2: 5}                                       |
+| ${ret}    | xl dict update parse    | ${strDic}    | ${rstrdic}                       |
+| log    | ${ret}                                                                     |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Domain Api Params">
+<arguments>
+<arg>data</arg>
+</arguments>
+<doc>说明：             
+                对于一个带参数的url，比如：http://test.api-shoulei-ssl.xunlei.com/api/adp/stat?source=ssp&amp;callId=1553501564&amp;appId=92，希望进行解析返回三部分，分别是domain、api、参数，比如：
+domain=http://test.api-shoulei-ssl.xunlei.com
+api=/api/adp/stat?
+parmas=source=ssp&amp;callId=1553501564&amp;appId=92
+                  
+                参数：
+        |  data (String)                      |     传入一个带参数的URL                            |
+                            
+                        返回值：
+        |  return value (list)                      | 返回符合要求列表类型序列        |
+        
+                       例子：
+        |            | *Keywords*           |  *Parameters*                                      |
+        | ${s}    | Set Variable    | http://test.api-shoulei-ssl.xunlei.com/api/adp/stat?source=ssp&amp;callId=1553501564&amp;appId=92   | 
+        | ${lst}    | xl domain api params    | ${s}    | 
+        | Log    | ${lst}   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Expire Date">
+<arguments>
+<arg>data</arg>
+</arguments>
+<doc></doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Generate Letters">
+<arguments>
+<arg>num</arg>
+</arguments>
+<doc>                说明：生成指定位数的"数字+小写字母"混合随机字符串
+                
+                参数：
+|  num (int)                      | 生成随机数的长度                               |
+                    
+                返回值：
+|  return value (String)                      | 指定位数的"数字+小写字母"混合随机字符串        |
+
+               例子：
+|            | *Keywords*           |  *Parameters*                                      |
+| ${ret}    | xl generate letters    | 32  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Generate Sessionid">
+<arguments>
+</arguments>
+<doc>生成发送请求需要的sessionid，格式为32位的数字与大写字母混合随机字符串</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Get Sign Msg">
+<arguments>
+<arg>soure_para</arg>
+<arg>bizKey</arg>
+</arguments>
+<doc>         说明：             
+        签名规则：    
+        设所有发送或者接收到的数据为集合M，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA。
+        特别注意以下重要规则：
+                    
+        参数名ASCII码从小到大排序（字典序）；
+        如果参数的值为空不参与签名；
+        参数名区分大小写；
+        接口可能增加字段，验证签名时必须支持增加的扩展字段    
+        
+        在stringA最后拼接上bizKey得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signMsg。
+        假设传送的参数如下：
+        mobile：   13888888888
+        content：  hello
+        bizNo：    00001
+        
+        第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：
+        stringA="bizNo=00001&amp;content=hello&amp;mobile=13888888888";
+        第二步：拼接API密钥：
+        stringSignTemp=stringA+bizKey="bizNo=00001&amp;content=hello&amp;mobile=13888888888abcdefghijklmnopqrstuvwxyz0123456789"
+        signMsg=MD5(stringSignTemp).toUpperCase()="D59E2B4CA960AA2B428430F8298E90C1"
+          
+        参数：
+|  soure_para (dict)                      |     需要签名发送的请求消息体                            |
+|  bizKey (String)                      | 秘钥字符串                              |
+                    
+                返回值：
+|  return value (String)                      | 返回符合要求的签名字段值        |
+
+               例子：
+|            | *Keywords*           |  *Parameters*                                      |  
+| ${d}     | Set Variable    | {"end_time":1552620567,"start_time":1552879767}    |
+| ${se}    | Set Variable    | 123456    |
+| ${data}  | xl get sign msg    | ${d}    | ${se}   |
+| Log    | ${data}   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Get Sign Result">
+<arguments>
+<arg>headerStr</arg>
+<arg>params</arg>
+<arg>signKey</arg>
+</arguments>
+<doc>     说明：
+     
+     签名规则：
+     
+     假设有参数字典M，将集合M内参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串params_join。
+     拼接headerStr+params_join+signKey得到sign_str字符串，并对sign_str进行MD5运算，得到sign值sign_result.
+                                            
+     参数：
+|  headerStr (str)                      |     参数拼接前字符串                            |
+|  params (dict)                      |     需要签名发送的请求消息体                            |
+|  signKey (Str)                      | 秘钥字符串                              |
+
+     返回值：
+|  return sign_result (Str)                      | 返回符合要求的签名字段值        |
+
+     例子：
+|            | *Keywords*           |  *Parameters*                                      |
+| ${headerStr}     | Set Variable    | appid    |
+| ${params}     | Set Variable    | {"end_time":1552620567,"start_time":1552879767}    |
+| ${signKey}    | Set Variable    | 123456    |
+| ${sign_reulst}  | xl get sign msg    | ${headerStr}    | ${params}   |${signKey}    |
+| Log    | ${sign_reulst}   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Get Sign Sha256">
+<arguments>
+<arg>bizKey</arg>
+<arg>data</arg>
+</arguments>
+<doc>说明：
+sha256加密
+return:加密结果转成16进制字符串形式
+                    参数：
+    |  bizKey (String)                      |     需要签名加密的KEY值                           |
+    |  data (dict)                      | 需要加密的字典数据                              |
+                        
+                    返回值：
+    |  return value (String)                      | 加密结果转成16进制字符串形式返回        |
+    
+                   例子：
+    |            | *Keywords*           |  *Parameters*                                      |
+    | ${bizKey}    | Set Variable    | abcdefghijklmnopqrstuvwxyz0123456789    | 
+    | ${data}    | Evaluate    | {"mobile":13888888888,"bizNo":"00001","content":"hello"}    | 
+    | ${rd}    | xl get sign sha256    | ${bizKey}    | ${data}    | 
+    | Log    | ${rd}    |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl GetPar Parse">
+<arguments>
+<arg>gStr</arg>
+<arg>dict</arg>
+</arguments>
+<doc>                说明：输入get请求参数串和要替换的key-value，更新get请求参数串
+               
+               参数：
+|  gStr (String)                      | Get请求字符串                              |
+|  dict (dict)                      | 需要修改的值（k:v）                               |
+                    
+                返回值：
+|  return value (String)                      | 已更新的Get请求字符串       |
+
+               例子：
+|            | *Keywords*           |  *Parameters*                                      |   
+| ${s}    | Set Variable    | auth.appid=64&amp;auth.platformVersion=10&amp;auth.appName=com.xunlei.niux.mobilegame.sdk&amp;auth.clientVersion=v2.7.6&amp;auth.deviceid=eb6bb24973fb5b0230d36f57c2c07d2e&amp;  |
+| | | auth.usernick=test&amp;auth.usrname=5123000009&amp;auth.userid=150157205&amp;auth.usernewno=1531483426&amp;auth.sessionid=639C27FD4986AED3F3CD7F2E37E1A8D5   |
+| ${d}    | Evaluate    | {'auth.usernick': '123', 'auth.usrname': 'cz002', 'auth.userid': '150005790', 'auth.usernewno': '1456903244', 'auth.sessionid': '937FBD261B2ECDFBC9623A6548081B66'}   |
+| ${retStr}    | xl getPar parse    | ${s}    ${d}   |
+| Log    | ${retStr}       |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Hmac Authorize">
+<arguments>
+<arg>clientID</arg>
+<arg>clientSecret</arg>
+<arg>reqType</arg>
+<arg>reqData</arg>
+</arguments>
+<doc>                         说明：             
+                        签名规则：    
+                        客户端使用HMAC算法进行签名，例如：GET /api/PATH1/PATH2?request=xxx 的请求，需要在http头部添加：
+
+                        Authorization: MAC id="xxx",ts="1336363200",nonce="jFm4mJEzVoUz",mac="xxx"
+                        
+                        其中：id 为分配的 client_id, ts 为当前时间戳，nonce是随机字符串, mac 是签名后的加密字符串。
+                        
+                        例如，上面的请求，mac 签名过程为：
+                        
+                        HMAC(client_secret, "1336363200
+ jFm4mJEzVoUz
+ GET
+ /api/PATH1/PATH2?request=xxx
+ 
+")
+
+                          
+                        参数：
+                |  clientID (String)                      |     需要签名发送的请求消息体                            |
+                |  clientSecret (String)                      | 秘钥字符串                              |
+                |  reqType (String)                      | 需要加密的请求类型                              |
+                |  reqData (String)                      | 需要加密的请求数据                             |
+                                    
+                                返回值：
+                |  return value (String)                      | 返回符合要求的签名header字段值        |
+                
+                               例子：
+                |            | *Keywords*           |  *Parameters*                                      |
+                | ${ci}    | Set Variable    | 132421421   |
+                | ${cs}    | Set Variable    | jFm4mjFm4mJEzVoUzJEzVoUz |
+                | ${rd}    | Set Variable    | GET
+/api/PATH1/PATH2?request=xxx |
+                | ${r}     | xl hmac authorize   | ${ci}   | ${cs}   | ${rd} |
+                | Log      | ${r}   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Hub HttpQuery">
+<arguments>
+<arg>gcid</arg>
+<arg>cid</arg>
+<arg>peerid</arg>
+<arg>filesize</arg>
+</arguments>
+<doc>HUB模块，发送二进制消息接口关键字</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl ListDict Update Parse">
+<arguments>
+<arg>originList</arg>
+<arg>changeList</arg>
+</arguments>
+<doc>                说明：批量更新列表的每个字典中指定KEY值对应的VALUE
+                 参数:
+        |  originList (list)                      | 初始列表值                                 |
+        |  changeList (list)                      | 需要更新的列表（列表中含有字典）                                 |
+        
+                返回值：
+        |  return value (String)                      | 将更新好的字典以字符串形式返回        |
+                例子:
+
+|            | *Keywords*           |  *Parameters*                                      |
+| ${s}    | Evaluate    | [{"request":"setuserinfo","userid":"18888888888","usertype":"-1","idcardno":"","idcardno_status":"0","truename":"","appid":"0"},    |
+|         |             |                             {"request":"unbind","userid":"18888888888","usertype":"-1","nametype":"3","appid":"0"},{"request":"ccc","userid":"1999","usertype":"-1","nametype":"3","appid":"0"}]    |
+| ${u}    | Evaluate    | [{"request":"setuser111","usertype":"999"},{"request":"setuser222","usertype":"000"},{}]     | 
+| ${r}    | xl listDict update parse    | ${s}    | ${u}    | 
+| Log    | ${r}               |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Mysql Connect">
+<arguments>
+<arg>dbhost</arg>
+<arg>dbname</arg>
+<arg>username</arg>
+<arg>password</arg>
+</arguments>
+<doc>连接数据库，连接正常返回true，否则返回false</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Mysql Query">
+<arguments>
+<arg>sql</arg>
+</arguments>
+<doc>数据库查询，返回查询列表</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Mysql Release">
+<arguments>
+</arguments>
+<doc>关闭数据库</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Mysql Update">
+<arguments>
+<arg>sql</arg>
+</arguments>
+<doc>数据库增、删、改，执行成功返回true，否则返回false</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Open Excel">
+<arguments>
+<arg>filename</arg>
+</arguments>
+<doc>                说明：从“文件名”参数中提供的路径打开Excel文件。
+                 
+                 参数:
+        |  File Name (string)                      | 将用于打开Excel文件以执行测试的文件名字符串值。                                  |
+                例子:
+
+| *Keywords*           |  *Parameters*                                      |
+| Open Excel           |  C:\Python27\ExcelRobotTest\ExcelRobotTest.xls  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Params Get From Url">
+<arguments>
+<arg>data</arg>
+</arguments>
+<doc>说明：             
+                对于一个带参数的url，比如：http://test.api-shoulei-ssl.xunlei.com/api/adp/stat?source=ssp&amp;callId=1553501564&amp;appId=92，希望进行解析返回参数部分，比如：
+source=ssp
+callId=1553501564
+appId=92
+                  
+                参数：
+        |  data (String)                      |     传入一个带参数的URL                            |
+                            
+                        返回值：
+        |  return value (list)                      | 返回符合要求列表类型序列        |
+        
+                       例子：
+        |            | *Keywords*           |  *Parameters*                                      |
+        | ${s}    | Set Variable    | http://test.api-shoulei-ssl.xunlei.com/api/adp/stat?source=ssp&amp;callId=1553501564&amp;appId=92   | 
+        | ${lst}    | xl params get from url    | ${s}    | 
+        | Log    | ${lst}   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Parse ListDict">
+<arguments>
+<arg>lisDictData</arg>
+<arg>key</arg>
+<arg>value</arg>
+</arguments>
+<doc></doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Read Cell Data By Name">
+<arguments>
+<arg>sheetname</arg>
+<arg>cell_name</arg>
+</arguments>
+<doc>                说明：使用单元格名称从该单元格返回数据。
+
+                参数:
+        |  Sheet Name (string)  | 单元格值将从中返回的所选工作表。  |
+        |  Cell Name (string)   | 将从中返回值的选定单元格名称。   |
+        
+                返回值：
+        |  return value (String)                      | 返回单元格数据        |
+                例子:
+
+| *Keywords*           |  *Parameters*                                             |
+| Open Excel           |  D:\Python37\ExcelRobotTest\ExcelRobotTest.xls  |      |
+| Get Cell Data        |  TestSheet1                                        |  A2  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Ret Code Parse">
+<arguments>
+<arg>retData</arg>
+</arguments>
+<doc>            说明：解析retData内容，返回内容中 "ret="之后,"&amp;"之前的CODE值  
+            
+            参数：
+    |  retData (String)                      | 输入一个字符串                                 |
+    
+            返回值：
+    |  return value (String)                      | 返回retcode值        |
+            例子:
+|            | *Keywords*           |  *Parameters*                                      |            
+| ${retData}    | Set Variable    | register_date=2019-03-04&amp;ret=99988888&amp;user_id=150157372&amp;vas_id=2&amp;pay_id=2&amp;state=1&amp;unregister_date=2019-03-04&amp;uid=999999&amp;grow=10&amp;vas_type=2&amp;vas_auto_deduct=0&amp;last_fee_date=2019-03-04   |
+| ${retCode}    | xl ret code parse    | ${retData}    |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Ret JsonKey Parse">
+<arguments>
+<arg>data</arg>
+<arg>key</arg>
+</arguments>
+<doc>            说明：将字符串转换为json格式并取出指定key所对应的所有Value
+            
+            参数：
+    |  data (dict or list)                      | 字典、列表混合类型                                |
+    |  key (String)                      | 要查找的key值                                 |
+    
+            返回值：
+    |  return value (list)                      | 返回一个列表，包含key值对应的所有value        |
+            例子：
+|            | *Keywords*           |  *Parameters*                                      |  
+| ${data}    | Set Variable    | {"code": "ss", "rows":[{"id": 1, "value": "test"},{"id": 2, "value": "ress"}]}    |
+| ${retData1}    | xl ret jsonKey parse    | ${data}    | id  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Sign Chz">
+<arguments>
+<arg>req_method</arg>
+<arg>req_url</arg>
+<arg>id</arg>
+<arg>secret</arg>
+<arg>req_data=def</arg>
+</arguments>
+<doc>账号模块，陈政 专用签名方法</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Sign Yuj">
+<arguments>
+<arg>req_method</arg>
+<arg>req_url</arg>
+<arg>id</arg>
+<arg>secret</arg>
+</arguments>
+<doc>账号模块，於剑 专用签名方法</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Ssp Authorize">
+<arguments>
+<arg>secret</arg>
+<arg>data</arg>
+<arg>appid=True</arg>
+</arguments>
+<doc>                说明：根据传入参数生成签名（md5）
+                签名规则：                     
+                加入签名认证后，应用需要在此请求基础上增加sign参数。具体生成签名的规则为：将请求中所有参数进行排序，排序为字典序；
+                将排序好的参数进行转换，去掉"&amp;",例如：k1=v1&amp;k2=v2&amp;k3=v3变为 k1=v1k2=v2k3=v3；
+                在上述转换后的串末尾追加上secret值。secret值为应用的 secret的值。
+                用MD5算出上述串的MD5值，然后作为sign的值传入请求中。
+                
+                参数：
+|  secret (String)                      | 秘钥字符串                               |
+|  data (String)                      | 需要签名发送的请求消息体                               |
+                    
+                返回值：
+|  return value (String)                      | 返回符合要求的签名字段值        |
+
+               例子：
+|            | *Keywords*           |  *Parameters*                                      |   
+| ${d}     | Set Variable    | end_time=1552620567&amp;start_time=1552879767    |
+| ${se}    | Set Variable    | 123456    |
+| ${data}  | xl ssp authorize    | ${se}    | ${d}   |
+| Log    | ${data}   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Urldecode Parse">
+<arguments>
+<arg>s</arg>
+</arguments>
+<doc>                说明：urlcode格式编码字符串解码
+                
+                参数：
+|  s (String)                      | urlcode格式编码字符串                               |
+                    
+                返回值：
+|  return value (String)                      | 将urlcode格式编码字符串解码后，返回原始请求字符串        |
+
+               例子：
+|            | *Keywords*           |  *Parameters*                                      |
+| ${s}    | Set Variable    | url=172.30.29.249:31888&amp;req=[{"request":"setuserinfo","userid":"160187549","usertype":"2","idcardno":"","idcardno_status":"0","truename":"","appid":"0"}, |
+|         |                 | {"request":"unbind","userid":"160187549","usertype":"2","nametype":"3","appid":"0"}]&amp;type=cbin&amp;proto=TCP    |
+| ${r}    | xl urldecode parse    | ${s}    |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Urlencode Parse">
+<arguments>
+<arg>s</arg>
+</arguments>
+<doc>                说明：生成urlcode格式编码字符串
+                
+                参数：
+|  s (String)                      | 原始证求字符串                               |
+                    
+                返回值：
+|  return value (String)                      | 返回urlcode格式编码字符串        |
+
+               例子：
+|            | *Keywords*           |  *Parameters*                                      |
+| ${s}    | Set Variable    | url=172.30.29.249:31888&amp;req=[{"request":"setuserinfo","userid":"160187549","usertype":"2","idcardno":"","idcardno_status":"0","truename":"","appid":"0"}, |
+|         |                 | {"request":"unbind","userid":"160187549","usertype":"2","nametype":"3","appid":"0"}]&amp;type=cbin&amp;proto=TCP    |
+| ${r}    | xl urlencode parse    | ${s}    |</doc>
+<tags>
+</tags>
+</kw>
+</keywordspec>

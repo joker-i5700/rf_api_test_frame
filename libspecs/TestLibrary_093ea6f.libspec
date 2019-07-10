@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keywordspec name="TestLibrary" type="library" format="ROBOT" generated="20190710 15:55:07">
+<version></version>
+<scope>global</scope>
+<namedargs>yes</namedargs>
+<doc>Thunder RF TestLibrary. Generate by jet.
+
+You can execute   *python -m robot.libdoc -v docVersion ./TestLibrary/ TestLibrary.html*  command  to auto generate the doc.
+
+
+*Before running tests*
+
+Prior to running tests, TestLibrary must first be imported into your Robot test suite.
+
+Example:
+    | Library | TestLibrary |</doc>
+<kw name="Kw Body Parse">
+<arguments>
+<arg>content</arg>
+<arg>key</arg>
+</arguments>
+<doc>                说明：将字符串转换为json格式并取出指定的key
+
+                 参数:
+        |  content (string)                      | 输入一个字符串，通常为返回消息体的content字段                                  |
+        |  key (string)                      | 指定一个Key值                                  |
+
+                返回值：
+        |  return value (String)                      | 返回取出指定的key        |
+                例子:
+
+| *Keywords*           |  *Parameters*                                      |
+| Kw Body Parse           |  ${response.content}  | requestType   |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Body Tojson">
+<arguments>
+<arg>content</arg>
+</arguments>
+<doc>                说明：将字符串转化为json对象
+
+                参数:
+        |  content (string)                      | 输入一个字符串，通常为返回消息体的content字段                                  |
+
+                返回值：
+        |  return value (String)                      | 返回json类型对象        |
+                例子:
+
+| *Keywords*           |  *Parameters*                                      |
+| kw body tojson           |  ${response.content}  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Config Add Item">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+<arg>key_value</arg>
+</arguments>
+<doc>增加配置项</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Config Get Value">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+</arguments>
+<doc>获取指定配置的值</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Config Remove Item">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+</arguments>
+<doc>删除指定配置的值</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Config Set Value">
+<arguments>
+<arg>section_name</arg>
+<arg>key_name</arg>
+<arg>key_value</arg>
+</arguments>
+<doc>设置指定配置的值</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Dict Update Parse">
+<arguments>
+<arg>originDict</arg>
+<arg>changeDict</arg>
+</arguments>
+<doc>               说明：更新字典的值，如果key值不存在，则新增字典项
+
+                参数:
+        |  originDict (dict)                      | 初始字典值                                 |
+        |  changeDict (dict)                      | 需要更新的字典值（k:v）                                 |
+
+                返回值：
+        |  return value (String)                      | 将更新好的字典以字符串形式返回        |
+                例子:
+
+|            | *Keywords*           |  *Parameters*                                      |
+| ${strdic}    | Set Variable    | {1: 'a', 2: 3, 3: 'test', 4: 100}                   |
+| ${rstrdic}    | Set Variable    | {1:'b',2: 5}                                       |
+| ${ret}    | kw dict update parse    | ${strDic}    | ${rstrdic}                       |
+| log    | ${ret}                                                                     |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Expire Date">
+<arguments>
+<arg>data</arg>
+</arguments>
+<doc></doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Mysql Connect">
+<arguments>
+<arg>dbhost</arg>
+<arg>dbname</arg>
+<arg>username</arg>
+<arg>password</arg>
+</arguments>
+<doc>连接数据库，连接正常返回true，否则返回false</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Mysql Query">
+<arguments>
+<arg>sql</arg>
+</arguments>
+<doc>数据库查询，返回查询列表</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Kw Mysql Update">
+<arguments>
+<arg>sql</arg>
+</arguments>
+<doc>数据库增、删、改，执行成功返回true，否则返回false</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Mysql Release">
+<arguments>
+</arguments>
+<doc>关闭数据库</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Open Excel">
+<arguments>
+<arg>filename</arg>
+</arguments>
+<doc>                说明：从“文件名”参数中提供的路径打开Excel文件。
+                 
+                 参数:
+        |  File Name (string)                      | 将用于打开Excel文件以执行测试的文件名字符串值。                                  |
+                例子:
+
+| *Keywords*           |  *Parameters*                                      |
+| Open Excel           |  C:\Python27\ExcelRobotTest\ExcelRobotTest.xls  |</doc>
+<tags>
+</tags>
+</kw>
+<kw name="Xl Read Cell Data By Name">
+<arguments>
+<arg>sheetname</arg>
+<arg>cell_name</arg>
+</arguments>
+<doc>                说明：使用单元格名称从该单元格返回数据。
+
+                参数:
+        |  Sheet Name (string)  | 单元格值将从中返回的所选工作表。  |
+        |  Cell Name (string)   | 将从中返回值的选定单元格名称。   |
+        
+                返回值：
+        |  return value (String)                      | 返回单元格数据        |
+                例子:
+
+| *Keywords*           |  *Parameters*                                             |
+| Open Excel           |  D:\Python37\ExcelRobotTest\ExcelRobotTest.xls  |      |
+| Get Cell Data        |  TestSheet1                                        |  A2  |</doc>
+<tags>
+</tags>
+</kw>
+</keywordspec>
