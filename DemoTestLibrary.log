@@ -1,6 +1,0 @@
-2019-07-09 11:00:53,722 - DemoTestLibrary - INFO - Input >>> originDict : {1: 'a', 2: 3, 3: 'test', 4: 100} , changeDict : {1: 'b', 2: 5}
-2019-07-09 11:00:53,723 - DemoTestLibrary - INFO - Output <<< originDict : {1: 'b', 2: 5, 3: 'test', 4: 100}
-2019-07-09 14:51:37,407 - DemoTestLibrary - INFO - Input >>> originDict : {1: 'a', 2: 3, 3: 'test', 4: 100} , changeDict : {1: 'b', 2: 5}
-2019-07-09 14:51:37,407 - DemoTestLibrary - INFO - Output <<< originDict : {1: 'b', 2: 5, 3: 'test', 4: 100}
-2019-07-09 14:52:02,193 - DemoTestLibrary - INFO - Input >>> originDict : {1: 'a', 2: 3, 3: 'test', 4: 100} , changeDict : {1: 'b', 2: 5}
-2019-07-09 14:52:02,193 - DemoTestLibrary - INFO - Output <<< originDict : {1: 'b', 2: 5, 3: 'test', 4: 100}

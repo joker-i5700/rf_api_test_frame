@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <projectConfiguration>
     <configVersion>2</configVersion>
-    <robotExecEnvironment path="D:/Python37" interpreter="Python"/>
     <relativeTo>WORKSPACE</relativeTo>
-    <referencedLibrary type="PYTHON" name="TestLibrary" path="rf_api_test"/>
-    <referencedLibrary type="PYTHON" name="RequestsLibrary" path="D:/Python37/Lib/site-packages"/>
     <pythonpath/>
     <classpath/>
     <excludedForValidation/>
