@@ -1,0 +1,13 @@
+*.pyc
+report.html
+output.xml
+log.html
+XlTestLibrary.log
+/libspecs/
+testcase/suite_demo/
+TestScript/*.robot
+testcase/*.zip
+TestScript/*.zip
+TestLibrary/infrastructure/Utility/go_lib/hub_dcdnhub_lib/py_dcdnhub.py
+TestLibrary/infrastructure/Utility/go_lib/hub_dcdnhub_lib/main.exe
+TestLibrary/infrastructure/Utility/go_lib/hub_dcdnhub_lib/baseRequest.exe

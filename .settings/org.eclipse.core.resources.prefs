@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//TestLibrary/infrastructure/Persistence/ConfigOperator.py=utf-8
+encoding//TestLibrary/infrastructure/Persistence/MysqlOperator.py=utf-8
+encoding//TestLibrary/infrastructure/Utility/AESCipher.py=utf-8
+encoding//TestLibrary/infrastructure/Utility/Logger.py=utf-8
+encoding//TestLibrary/keywords/Parse/ExcelParse.py=utf-8
+encoding//TestLibrary/keywords/Parse/RequestParse.py=utf-8
+encoding//TestLibrary/keywords/Persistence/ConfigService.py=utf-8
+encoding//TestLibrary/keywords/Persistence/MysqlService.py=utf-8
+encoding//TestLibrary/version.py=utf-8
+encoding/<project>=UTF-8

@@ -1,0 +1,10 @@
+robotframework==3.1.1
+robotframework-redislibrary==0.3
+robotframework-requests==0.5.0
+robotframework-sshlibrary==3.3.0
+jsonpatch==1.23
+jsonpointer==2.0
+PyMySQL==0.9.3
+xlrd==1.2.0
+urllib3==1.25.3
+pycryptodome==3.8.0
