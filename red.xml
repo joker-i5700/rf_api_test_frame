@@ -2,7 +2,7 @@
 <projectConfiguration>
     <configVersion>2</configVersion>
     <relativeTo>WORKSPACE</relativeTo>
-	<referencedLibrary type="PYTHON" name="TestLibrary" path="rf_api_test_frame"/>
+    <referencedLibrary type="PYTHON" name="TestLibrary" path="rf_api_test_frame"/>
     <referencedLibrary type="PYTHON" name="RequestsLibrary" path="D:/Python37/Lib/site-packages"/>
     <pythonpath/>
     <classpath/>

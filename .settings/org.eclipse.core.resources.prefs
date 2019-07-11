@@ -7,5 +7,6 @@ encoding//TestLibrary/keywords/Parse/ExcelParse.py=utf-8
 encoding//TestLibrary/keywords/Parse/RequestParse.py=utf-8
 encoding//TestLibrary/keywords/Persistence/ConfigService.py=utf-8
 encoding//TestLibrary/keywords/Persistence/MysqlService.py=utf-8
+encoding//TestLibrary/keywords/algorithm/crypt.py=utf-8
 encoding//TestLibrary/version.py=utf-8
 encoding/<project>=UTF-8
