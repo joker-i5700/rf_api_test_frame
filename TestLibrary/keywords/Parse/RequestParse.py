@@ -43,6 +43,56 @@ class RequestParse(object):
         content_json = JsonParse.content_to_json(content)
         return JsonParse.get_from_json(content_json, key)
 
+    def kw_body_parse_ex(self,data,key):
+        '''
+                        说明：将字符串转换为json格式并取出指定key所对应的所有Value
+                        
+                        参数：
+                |  data (dict or list)                      | 字典、列表混合类型                                |
+                |  key (String)                      | 要查找的key值                                 |
+                
+                        返回值：
+                |  return value (list)                      | 返回一个列表，包含key值对应的所有value        |
+                        例子：
+            |            | *Keywords*           |  *Parameters*                                      |  
+            | ${data}    | Set Variable    | {"code": "ss", "rows":[{"id": 1, "value": "test"},{"id": 2, "value": "ress"}]}    |
+            | ${retData1}    | xl ret jsonKey parse    | ${data}    | id  |                  
+        '''
+        self.lisValue = []
+        jsonData = JsonParse.content_to_json(data)
+        self._get_from_json_ex(jsonData,key)   
+        return    self.lisValue 
+    
+    def _get_from_json_ex(self,data, name):
+        logger.debug("input data : %s" % data)
+        logger.debug("input name : %s" % name)
+        if type(data).__name__ == 'dict':
+            logger.debug("parse dict...")
+            if name in data.keys():
+                logger.debug("append value : %s"  % data[name])
+                self.lisValue.append(data[name])
+            else:
+                for key in data.keys():
+                    #print 'ssss %s' % data
+                    newData = data[key]
+                    if type(newData).__name__ == 'dict':
+                        logger.debug("parse dict......")
+                        #data = newData[key]
+                        #print ('data1 %s' % data)
+                        self._get_from_json_ex(newData, name)
+                    if type(newData).__name__ == 'list':
+                        logger.debug("parse list......")
+                        for i in range(len(newData)):
+                            tempData = newData[i]
+                            self._get_from_json_ex(tempData, name)
+    
+        if type(data).__name__ == 'list':
+            logger.debug("parse list...")
+            for i in range(len(data)):
+                tempData = data[i]
+                #print ('tempData %s' % tempData)
+                self._get_from_json_ex(tempData, name)
+
     def kw_body_tojson(self, content):
         '''
                         说明：将字符串转化为json对象
@@ -90,24 +140,62 @@ class RequestParse(object):
         nr = str(originDict).replace("\'", "\"")
         return nr
     
+    def kw_boundary_generate(self, dict, bran):
+        """ 说明：输入字典${dict}（key:value对）与${bran},生成from-data协议的数据格式string
+                                   
+                                   参数：
+                |  dict (dict)                      | 输入一个字典                                |
+                |  bran (String)                      |  from-data 格式分隔符                               |
+                
+                                    
+                                    返回值：
+                |  return value (String)                      | from-data协议的数据格式string body        |   
+                
+                                    例子：
+                |            | *Keywords*           |  *Parameters*                                      |
+                | ${dc}    | Evaluate    | {"sessionType":0,"clientSecret":100,"appid":100,"appName":"WEB-i.xxx.com"}    |
+                | ${st}=    | Set Variable    | ------WebKitFormBoundary5rFTEqcX0liWDgE8    |
+                | ${ret}    | xl boundary generate    | ${dc}    | ${st}   |
+                | Log    | ${ret}    |
+        """
+        rs = ""
+        lis = []
+        for k,v in dict.items():
+            lis.append(bran)
+            lis.append('Content-Disposition: form-data; name=\"' + k + '\"')
+            lis.append("")
+            lis.append(str(v))
+    
+        for s in lis:
+            rs = rs + s + "\r\n"
+    
+        rs = rs + bran + "--"
+        return rs
+    
+    def kw_cover_get_Parameters(self,gStr,dict):
+        """
+                                说明：输入get请求参数串和要替换的key-value，更新get请求参数串
+                               
+                               参数：
+                |  gStr (String)                      | Get请求字符串                              |
+                |  dict (dict)                      | 需要修改的值（k:v）                               |
+                                    
+                                返回值：
+                |  return value (String)                      | 已更新的Get请求字符串       |
+                
+                               例子：
+                |            | *Keywords*           |  *Parameters*                                      |   
+                | ${s}    | Set Variable    | appid=11&Version=10&appName=com.xxx.sdk&clientVersion=v1.0.0&deviceid=abcdefg1234567  |
+                | ${d}    | Evaluate    | {'appid': '123', 'appName': 'com.jet.sdk', 'deviceid': 'hijkl89012'}   |
+                | ${retStr}    | kw cover get Parameters    | ${s}    ${d}   |
+                | Log    | ${retStr}       |           
+                                
+        """
+        if "&" != gStr[-1:]:
+            gStr = gStr + "&"
+        for k,v in dict.items():
+            gStr = re.sub(str(k) + '=(.+?)&', str(k) + "=" + str(v) + "&", gStr)
+        return gStr[:-1]
+    
 
-    def kw_expire_date(self, data):
-        exp_date = ""
-        ldata = data.split('&')
-        for kv in ldata:
-            lkv = kv.split('=')
-            if "expire" == lkv[0]:
-                exp_date = lkv[1]
 
-        if "----" == exp_date:
-            return exp_date
-
-        cur_date = time.strftime('%Y%m%d', time.localtime())
-        s_exp_date = date(int(exp_date[:4]), int(
-            exp_date[4:6]), int(exp_date[-2:]))
-        s_cur_date = date(int(cur_date[:4]), int(
-            cur_date[4:6]), int(cur_date[-2:]))
-
-        r_timedelta = s_exp_date - s_cur_date
-
-        return r_timedelta.days
