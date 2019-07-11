@@ -20,7 +20,7 @@ def find_file_name(file_dir):
     return files
 
 def openXls(file_name):
-    xlsfile = r"./XL_Account_TestCase/" + file_name    # 打开指定路径中的xls文件
+    xlsfile = r"./Demo_TestCase/" + file_name    # 打开指定路径中的xls文件
     return xlrd.open_workbook(xlsfile,encoding_override='utf-8')      #得到Excel文件的book对象，实例化对象
 
 def readXlsSheet(xlsObj,count):
@@ -95,12 +95,12 @@ def InterfaceTestCase_init(fileName):
     f.write('Suite Teardown    Log    Suite Teardown' + '\n')
     f.write('Test Setup        log    Test Setup' + '\n')
     f.write('Test Teardown     log    Teardown' + '\n')
-    f.write('Resource          XL_Account_kwRequests.robot' + '\n')
-    f.write('Resource          XL_Account_kwExcel.robot' + '\n')
+    f.write('Resource          Demo_kwRequests.robot' + '\n')
+    f.write('Resource          Demo_kwExcel.robot' + '\n')
     f.write('\n')
 
     f.write('*** Variables ***' + '\n')
-    f.write('${IP_PORT}     http://10.10.41.35:8000' + '\n')
+    f.write('${IP_PORT}     http://127.0.0.1:5000' + '\n')
     f.write('\n')
 
     f.write('*** Test Cases ***' + '\n')
@@ -111,9 +111,9 @@ def GeneratekwExcel(fileName,Keys):
     iKey = 2
     if '' != Keys[0].strip():  # 接口输入参数个数不为零
         for key in Keys:
-            f.write('    ${' + key + '}    Xl Read Cell Data By Name    ${CaseNo}    B' + str(iKey) + '\n')
+            f.write('    ${' + key + '}    kw Read Cell Data By Name    ${CaseNo}    B' + str(iKey) + '\n')
             iKey = iKey + 1
-    f.write('    ${ExpValue}    Xl Read Cell Data By Name    ${CaseNo}    F2' + '\n')
+    f.write('    ${ExpValue}    kw Read Cell Data By Name    ${CaseNo}    F2' + '\n')
     f.write('    [Return]')
     if '' != Keys[0].strip():  # 接口输入参数个数不为零
         for key in Keys:
@@ -176,7 +176,7 @@ def GeneratekwRequests(fileName,Keys,testCaseFileName,iType,iUrl,iSummary,iHeade
         elif iType.upper() == 'PUT':
             f.write('    ${Ret}    Put Request   api   ' + iUrl)
             for key in Keys:
-                f.write('    ' + key + '=${' + key + '}')
+                f.write('${' + key + '}')
             f.write('\n')
         else:
             f.write('    ${Ret}    Post Request   api   ' + iUrl)
@@ -206,9 +206,9 @@ def GenerateInterfaceTestCase(fileName,Keys,testCaseFileName,tag):
     if '' != Keys[0].strip():  # 接口输入参数个数不为零
         for key in Keys:
             f.write('    ${' + key + '}')
-    f.write('    ${exp}    XL_Account_Get_' + testCaseFileName[:-4] + '_Parameters    Case01')
+    f.write('    ${exp}    Demo_Get_' + testCaseFileName[:-4] + '_Parameters    Case01')
     f.write('\n')
-    f.write('    ${Resp_data}    XL_Account_' + testCaseFileName[:-4] + '    ${IP_PORT}')
+    f.write('    ${Resp_data}    Demo_' + testCaseFileName[:-4] + '    ${IP_PORT}')
     if '' != Keys[0].strip():  # 接口输入参数个数不为零
         for key in Keys:
             f.write('    ${' + key + '}')
@@ -219,18 +219,18 @@ def GenerateInterfaceTestCase(fileName,Keys,testCaseFileName,tag):
     f.write('\n')
     f.close()
 
-testCaseFiles = find_file_name("./XL_Account_TestCase")
+testCaseFiles = find_file_name("./Demo_TestCase")
 print (len(testCaseFiles))
 '''--------------生成kwExcel.robot脚本文件--------------'''
 i = 0
-kwExcel_name = 'XL_Account_kwExcel.robot'
+kwExcel_name = 'Demo_kwExcel.robot'
 GeneratekwExcel_init(kwExcel_name)
 
 for caseName in testCaseFiles:
     f = open(kwExcel_name, 'a')
-    f.write('XL_Account_Get_' + caseName[:-4] + '_Parameters' + '\n')
+    f.write('Demo_Get_' + caseName[:-4] + '_Parameters' + '\n')
     f.write('    [Arguments]    ${CaseNo}' + '\n')
-    f.write('    Xl Open Excel    ${CURDIR}${/}XL_Account_TestCase${/}' + caseName + '\n')
+    f.write('    kw Open Excel    ${CURDIR}${/}Demo_TestCase${/}' + caseName + '\n')
     f.close()
     while i < len(testCaseFiles):
         book = openXls(testCaseFiles[i])
@@ -245,12 +245,12 @@ for caseName in testCaseFiles:
 
 '''--------------生成kwRequests.robot脚本文件--------------'''
 j = 0
-kwRequests_name = 'XL_Account_kwRequests.robot'
+kwRequests_name = 'Demo_kwRequests.robot'
 kwRequests_init(kwRequests_name)
 
 for caseName in testCaseFiles:
     f = open(kwRequests_name, 'a')
-    f.write('XL_Account_' + caseName[:-4] + '\n')
+    f.write('Demo_' + caseName[:-4] + '\n')
     f.close()
     while j < len(testCaseFiles):
         bookRequests = openXls(testCaseFiles[j])
@@ -276,7 +276,7 @@ for caseName in testCaseFiles:
 
 '''--------------生成InterfaceTestCaseDemo.robot脚本文件--------------'''
 k = 0
-InterfaceTestCase_name = 'XL_Account_InterfaceTestCaseDemo.robot'
+InterfaceTestCase_name = 'Demo_InterfaceTestCaseDemo.robot'
 InterfaceTestCase_init(InterfaceTestCase_name)
 
 for caseName in testCaseFiles:

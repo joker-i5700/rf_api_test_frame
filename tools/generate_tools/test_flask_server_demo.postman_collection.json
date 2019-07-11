@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "818a9800-ff77-45ab-a325-28629bdd23ab",
+		"name": "test_flask_server_demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get_todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"sessionType\": 0,\r\n\t\"clientSecret\": 100,\r\n\t\"appid\": 100,\r\n\t\"appName\": \"WEB-i.xxx.com\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/tasks",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put_todos_task",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/todos/9?task=123aaa",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"9"
+					],
+					"query": [
+						{
+							"key": "task",
+							"value": "123aaa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_todos_task",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/todos/9",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_todos_task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/todos/9",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"todos",
+						"9"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
