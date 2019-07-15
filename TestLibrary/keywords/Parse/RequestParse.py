@@ -16,7 +16,7 @@ from datetime import date
 import binascii
 from TestLibrary.infrastructure.Parse.JsonParse import JsonParse
 from TestLibrary.infrastructure.Utility.Logger import logger
-from TestLibrary.infrastructure.Utility.AESCipher import AESCipher
+
 
 
 class RequestParse(object):
