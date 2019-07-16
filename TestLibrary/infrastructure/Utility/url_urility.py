@@ -6,6 +6,7 @@
 @Filename : url_urility.py
 @Software : pycharm
 """
+import re
 from .Logger import logger
 from urllib import parse as ps
 
@@ -76,8 +77,29 @@ class UrlUrility:
         """
         parseResult = ps.urlparse(url)
         scheme = parseResult.scheme + '://' if parseResult.scheme else ''
-    #     hostname = parseResult.hostname+":"+str(parseResult.port)
-        return '{0}{1}{2}'.format(scheme, hostAndport, parseResult.path)
+        path_and_params = parseResult.path + \
+        ('?' + parseResult.query) if parseResult.query else parseResult.path
+        return '{0}{1}{2}'.format(scheme, hostAndport, path_and_params)
+    
+    def get_path_by_replace_query_params(self, url, queryParams):
+        """
+                        将URL中的QUERY参数信息，更新为输入字典参数对应的VALUE值
+        :param url: 字符串类型URL
+        :param queryParams: 字典类型，输入要替换指定KEY的VALUE
+        :return: 字符串类型，更新后的URL
+        """
+        parseResult = ps.urlparse(url)
+        scheme = parseResult.scheme + '://' if parseResult.scheme else ''
+        query_params = parseResult.query
+        if "&" != query_params[-1:]:
+            query_params = query_params + "&"
+        for k, v in queryParams.items():
+            query_params = re.sub(
+                str(k) + '=(.+?)&',
+                str(k) + "=" + str(v) + "&",
+                query_params)
+        return '{0}{1}{2}?{3}'.format(
+            scheme, parseResult.netloc, parseResult.path, query_params[:-1])
     
     
     def get_host_port_with_prefix(self, url):

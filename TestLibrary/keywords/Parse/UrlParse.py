@@ -16,11 +16,24 @@ class UrlParse:
         pass
         
     def kw_generate_url(self, *args, **kargs):
-        # logger.info(args)
         uu = UrlUrility()
         return uu.generate_url(*args, **kargs)
     
-    def kw_test(self):
-        print("test")
+    def kw_parse_url(self,  *urls):
+        uu = UrlUrility()
+        return uu.parse_url(*urls)
+    
+    def kw_get_path_by_replace_host_port(self, url, hostAndport):
+        uu = UrlUrility()
+        return uu.get_path_by_replace_host_port(url, hostAndport)
+    
+    def kw_get_path_by_replace_query_params(self, url, queryParams):
+        uu = UrlUrility()
+        return uu.get_path_by_replace_query_params(url, queryParams)
+    
+    def kw_get_host_port_with_prefix(self, url):
+        uu = UrlUrility()
+        return uu.get_host_port_with_prefix(url)
+
     
     
