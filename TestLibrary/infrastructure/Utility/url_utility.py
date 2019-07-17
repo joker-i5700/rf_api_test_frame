@@ -13,7 +13,7 @@ from urllib import parse as ps
 
 EMPTY = [None, "", {}, []]
 
-class UrlUrility:
+class UrlUtility:
     def __init__(self):
         pass
     
