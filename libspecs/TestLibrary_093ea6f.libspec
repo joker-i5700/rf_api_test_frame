@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<keywordspec name="rf_api_test_frame" type="library" format="ROBOT" generated="20190718 11:03:53">
+<keywordspec name="rf_api_test_frame" type="library" format="ROBOT" generated="20190718 18:25:34">
 <version></version>
 <scope>global</scope>
 <namedargs>yes</namedargs>
